@@ -9,9 +9,11 @@ function App() {
 
   return (
     <>
-      {/* <VisitedDogs /> */}
-      <DiscoverDogs />
-      {/* <BanList /> */}
+      <div className='grid grid-cols-1 lg:grid-cols-3 '>
+        <VisitedDogs />
+        <DiscoverDogs />
+        <BanList />
+      </div>
     </>
   )
 }

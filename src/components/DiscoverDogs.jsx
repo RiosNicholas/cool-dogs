@@ -4,8 +4,8 @@ const DiscoverDogs = () => {
     const [dogName, setDogName] = useState('Oliver');
     const attributes = [];
     return (
-        <>
-            <header className="m-4 p-2">
+        <div className="flex flex-col items-center justify-center h-screen m-2">
+            <header className="p-6">
                 <h1 className="font-extrabold text-6xl">Veni Vici!</h1>
                 <h2 className="text-lg">🦴 Discover some superrr cool dogs! 🐶</h2>
             </header>
@@ -19,7 +19,7 @@ const DiscoverDogs = () => {
                 <img alt={`${dogName} the dog`} src="" className="m-1"/>
                 <button className="mt-5">🔀 Discover!</button>
             </main>
-        </>
+        </div>
     );
 }
 
