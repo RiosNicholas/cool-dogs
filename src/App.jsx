@@ -1,4 +1,5 @@
 import { useState } from 'react'
+const ACCESS_KEY = import.meta.env.VITE_APP_ACCESS_KEY;
 import './App.css'
 import BanList from './components/BanList'
 import DiscoverDogs from './components/DiscoverDogs'
