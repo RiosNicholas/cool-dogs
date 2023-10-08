@@ -12,7 +12,7 @@ function App() {
     <>
       <div className='grid grid-cols-1 lg:grid-cols-3 '>
         <VisitedDogs />
-        <DiscoverDogs />
+        <DiscoverDogs apiKey={ACCESS_KEY}/>
         <BanList />
       </div>
     </>
