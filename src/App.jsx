@@ -6,14 +6,19 @@ import DiscoverDogs from './components/DiscoverDogs'
 import VisitedDogs from './components/VisitedDogs'
 
 function App() {
-  const [count, setCount] = useState(0)
+  /* HOOKS */
+  const [banList, setBanList] = useState([]);
+
+  const addToBanList = (item) => {
+    setBanList([...banList, item]);
+  };
 
   return (
     <>
       <div className='grid grid-cols-1 lg:grid-cols-3 '>
         <VisitedDogs />
-        <DiscoverDogs apiKey={ACCESS_KEY}/>
-        <BanList />
+        <DiscoverDogs apiKey={ACCESS_KEY} banList={banList} addToBanList={addToBanList}/>
+        <BanList banList={banList} addToBanList={addToBanList}/>
       </div>
     </>
   )
