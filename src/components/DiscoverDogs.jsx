@@ -20,23 +20,34 @@ const DiscoverDogs = ({ apiKey, banList, addToBanList }) => {
                 const temperament = breedData.temperament.split(', ');
                 const lifeSpan = breedData.life_span;
 
-                setDogData({
-                    name,
-                    breedGroup,
-                    temperament,
-                    lifeSpan,
-                    imageUrl: response.data[0].url,
-                });
+                // Check if any of the dog data is in BanList
+                const isBanned = [name, breedGroup, ...temperament, lifeSpan].some(attr => banList.includes(attr));
+                if (!isBanned) {
+                    setDogData({
+                        name,
+                        breedGroup,
+                        temperament,
+                        lifeSpan,
+                        imageUrl: response.data[0].url,
+                    });
+                } else {
+                    fetchRandomDog();
+                }
             }
         } catch (error) {
             console.error('Error fetching dog data:', error);
         }
     };
 
+    // Add clicked attributed to the ban list
+    const handleAttributeClick = (attribute) => {
+        addToBanList(attribute);
+    }
+
     // Fetch a random dog's data when the component mounts or when the API key changes
     useEffect(() => {
         fetchRandomDog();
-    }, [apiKey]);
+    }, [apiKey, banList]);
 
     return (
         <div className="flex flex-col items-center justify-center h-full m-2">
@@ -52,18 +63,28 @@ const DiscoverDogs = ({ apiKey, banList, addToBanList }) => {
                             <img alt={`${dogData.name} the dog`} src={dogData.imageUrl} className="m-1 w-3/4"/>
                         </div>
                         <ul className="grid md:grid-cols-3 sm:grid-cols-1 m-2">
-                            <li className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700">
+                            <li 
+                                className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700 hover:bg-yellow-500 hover:cursor-pointer"
+                                onClick={() => handleAttributeClick(dogData.breedGroup)}
+                            >
                                 {dogData.breedGroup}
                             </li>
 
                             {/* Dynamically render separate <li> tags by splitting traits separated by commas*/}
                             {dogData.temperament.map((trait, index) => (
-                                <li key={index} className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700">
+                                <li 
+                                    key={index} 
+                                    className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700 hover:bg-yellow-500 hover:cursor-pointer"
+                                    onClick={() => handleAttributeClick(trait)}
+                                >
                                     {trait}
                                 </li>
                             ))}
                    
-                            <li className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700 overflow-visible">
+                            <li 
+                                className="p-2 m-1 bg-yellow-600 font-semibold rounded-md shadow-sm shadow-gray-700 overflow-visible hover:bg-yellow-500 hover:cursor-pointer" 
+                                onClick={() => handleAttributeClick(dogData.lifeSpan)}
+                            >
                                 {dogData.lifeSpan}
                             </li>
                         </ul>
