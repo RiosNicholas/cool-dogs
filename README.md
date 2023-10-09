@@ -4,7 +4,7 @@ Submitted by: **Nicholas Rios**
 
 This web app: **Dynamically renders data about interesting dog breeds using the Dog API**
 
-Time spent: **X** hours spent in total
+Time spent: **3.5** hours spent in total
 
 ## Required Features
 
